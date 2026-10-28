@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    env:
+      # Dummy public Firebase values let the build exercise the configured path.
+      VITE_FIREBASE_API_KEY: ci-public-api-key
+      VITE_FIREBASE_AUTH_DOMAIN: ci-project.firebaseapp.com
+      VITE_FIREBASE_PROJECT_ID: ci-project
+      VITE_FIREBASE_STORAGE_BUCKET: ci-project.firebasestorage.app
+      VITE_FIREBASE_MESSAGING_SENDER_ID: "1234567890"
+      VITE_FIREBASE_APP_ID: 1:1234567890:web:ci
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run lint
+      - run: npm run build

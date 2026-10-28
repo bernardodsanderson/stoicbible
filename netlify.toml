@@ -1,0 +1,13 @@
+# Netlify build for TanStack Start.
+# The @netlify/vite-plugin-tanstack-start plugin wires SSR and the static client
+# bundle into a Netlify Function.
+[build]
+  command = "npm run build"
+  publish = "dist/client"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# No Firebase secret is required here. Set the six public VITE_FIREBASE_*
+# variables in the Netlify UI (see .env.example). Vite inlines them at build
+# time, so redeploy after changing them.
