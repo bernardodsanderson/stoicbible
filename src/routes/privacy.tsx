@@ -10,9 +10,10 @@ function PrivacyPage() {
       <main className="mx-auto max-w-3xl px-4 py-12 leading-relaxed">
         <h1 className="font-display text-4xl font-semibold">Privacy Policy</h1>
         <p className="mt-6 text-muted">
-          We collect the account information you provide (name, email), the journals, highlights,
-          bookmarks, and quotes you create, and basic reading progress so streaks and "mark as read"
-          work. Private journals are visible only to you.
+          We collect your email address, an optional display name and username, the journals,
+          highlights, bookmarks, and quotes you create, and basic reading progress so streaks and
+          "mark as read" work. Private journals are visible only to you. Your public profile shows
+          only your username and display name — never your email or your journals.
         </p>
         <h2 className="mt-8 font-display text-2xl">Sign-in</h2>
         <p className="mt-3 text-muted">
