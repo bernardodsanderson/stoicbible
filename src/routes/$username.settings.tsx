@@ -3,7 +3,6 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { ProfileTabs } from "@/components/profile-tabs";
-import { VerifyEmailBanner } from "@/components/verify-email-banner";
 import { useTheme } from "@/components/theme-provider";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -74,7 +73,6 @@ function SettingsPage() {
   return (
     <div className="pb-16">
       <ProfileTabs username={username} active="settings" />
-      <VerifyEmailBanner />
 
       <section className="mt-8 space-y-4">
         <h2 className="font-display text-2xl">Profile</h2>

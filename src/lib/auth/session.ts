@@ -17,7 +17,6 @@ export type AppUser = {
   displayName: string | null;
   primaryEmail: string | null;
   profileImageUrl: string | null;
-  emailVerified: boolean;
 };
 
 export type AuthState = {
@@ -50,7 +49,6 @@ export function mapFirebaseUser(user: User | null | undefined): AppUser | null {
     displayName: user.displayName,
     primaryEmail: user.email,
     profileImageUrl: user.photoURL,
-    emailVerified: user.emailVerified,
   };
 }
 
@@ -91,23 +89,6 @@ export function getAuthState(): AuthState {
 /** Server render must be deterministic and match the client's first paint. */
 export function getServerAuthState(): AuthState {
   return INITIAL;
-}
-
-/** Re-read the current Firebase user (e.g. after verifying an email link). */
-export async function refreshAuthUser(): Promise<void> {
-  if (!firebaseConfigured) return;
-  const client = firebaseAuth();
-  const user = client.currentUser;
-  if (!user) {
-    emit(SIGNED_OUT);
-    return;
-  }
-  try {
-    await user.reload();
-  } catch (err) {
-    console.error("[auth] user reload failed:", err);
-  }
-  emit({ user: mapFirebaseUser(client.currentUser), isPending: false });
 }
 
 export function subscribeAuth(listener: () => void): () => void {

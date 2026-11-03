@@ -9,14 +9,12 @@ describe("Firebase user mapping", () => {
       displayName: "Ada",
       email: "ada@example.com",
       photoURL: null,
-      emailVerified: true,
     } as never);
     assert.deepEqual(user, {
       id: "uid-1",
       displayName: "Ada",
       primaryEmail: "ada@example.com",
       profileImageUrl: null,
-      emailVerified: true,
     });
   });
 

@@ -5,4 +5,4 @@
  * store and sign-out live in `./session`; Firebase client access lives in
  * `@/lib/firebase/client`.
  */
-export { authEnabled, refreshAuthUser, signOut, signOutLocal, type AppUser } from "./session";
+export { authEnabled, signOut, signOutLocal, type AppUser } from "./session";

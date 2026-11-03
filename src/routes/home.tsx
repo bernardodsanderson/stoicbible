@@ -5,7 +5,6 @@ import { useState } from "react";
 import { BookCover } from "@/components/book-cover";
 import { JournalCard } from "@/components/journal-card";
 import { SiteHeader } from "@/components/site-header";
-import { VerifyEmailBanner } from "@/components/verify-email-banner";
 import { Button } from "@/components/ui/button";
 import { RedirectToSignIn } from "@/lib/auth/gates";
 import { useAppAccount } from "@/lib/stoic/use-app-account";
@@ -36,7 +35,6 @@ function HomePage() {
   return (
     <>
       <SiteHeader />
-      <VerifyEmailBanner />
       <main className="mx-auto w-full max-w-5xl px-4 py-10">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>

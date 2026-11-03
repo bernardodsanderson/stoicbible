@@ -22,7 +22,7 @@ for development so your test data stays separate.
 - Private journals, saved quotes, reading progress, and daily streaks
 - Search across books, verses, and quotes
 - Email/password authentication with persistent sessions
-- Email verification and password-reset flows
+- Password-reset flow
 - Installable PWA with offline reading for saved chapters
 - Responsive layout with a mobile tab bar and accessible controls
 
@@ -160,13 +160,13 @@ The included Netlify configuration builds with `npm run build`, publishes
    these values at build time.
 
 For a custom domain, add it to Netlify and to Firebase Auth's authorized
-domains before relying on verification or reset links.
+domains before relying on password-reset links.
 
 ### Email delivery
 
-Firebase Auth sends verification and password-reset emails using the project's
-templates. Customize the templates and sender in **Authentication → Templates**
-and review Firebase's per-project email rate limits before launch.
+Password-reset emails go out through the project's Firebase Auth templates.
+Customize the template and sender in **Authentication → Templates** and review
+Firebase's per-project email rate limits before launch.
 
 ### Netlify HTML injection
 

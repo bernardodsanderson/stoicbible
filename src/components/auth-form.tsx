@@ -1,15 +1,11 @@
 import { useState } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
-import {
-  createUserWithEmailAndPassword,
-  sendEmailVerification,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { firebaseAuth } from "@/lib/firebase/client";
-import { actionCodeSettings, firebaseConfigured } from "@/lib/firebase/config";
+import { firebaseConfigured } from "@/lib/firebase/config";
 
 type Mode = "signin" | "signup";
 
@@ -43,8 +39,7 @@ function friendlyAuthError(error: unknown): string {
  * Email/password sign-in and sign-up (the only auth method).
  *
  * Firebase keeps the session locally, so a signed-in visitor survives reloads
- * and browser restarts. Sign-up immediately creates a session and sends a
- * verification email; the app stays usable while it is unverified.
+ * and browser restarts. Sign-up creates a session immediately.
  */
 export function AuthForm({ mode }: { mode: Mode }) {
   const navigate = useNavigate();
@@ -84,15 +79,8 @@ export function AuthForm({ mode }: { mode: Mode }) {
     try {
       const auth = firebaseAuth();
       if (isSignup) {
-        const credential = await createUserWithEmailAndPassword(auth, email.trim(), password);
-        // A failure here must not lose the newly created session.
-        try {
-          await sendEmailVerification(credential.user, actionCodeSettings("/auth/callback"));
-        } catch (err) {
-          console.warn("[auth] could not send the verification email:", err);
-        }
-        // Firebase signs the new account in immediately; the home page shows
-        // a "verify your email" banner until the link is opened.
+        await createUserWithEmailAndPassword(auth, email.trim(), password);
+        // Firebase signs the new account in immediately.
         await navigate({ to: "/home" });
       } else {
         await signInWithEmailAndPassword(auth, email.trim(), password);
